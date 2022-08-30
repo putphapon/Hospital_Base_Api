@@ -9,4 +9,4 @@ docker-compose up
 ```
 
 # Link
-[http://localhost:8000/docs](https://localhost:8000)
+[http://localhost:8000/docs](http://localhost:8000/docs)
