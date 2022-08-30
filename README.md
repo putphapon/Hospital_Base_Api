@@ -4,7 +4,7 @@ docker-compose build
 ```
 
 # Up
-``` 
+``` console
 docker-compose up
 ```
 
