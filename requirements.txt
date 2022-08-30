@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+SQLAlchemy
+databases
+DateTime
+typing
+uuid
+pydantic
+passlib
+asyncpg
+psycopg2
+starlette
