@@ -102,6 +102,29 @@ async def get_register(profile: model.Profile):
     
     return { profile.type }
 
+@app.post("/api/register-admin/", tags=["Register"])
+async def get_register_admin(profile: model.ProfileAdmin):
+    query = users.insert().values(
+        username        = profile.username,
+        password        = pwd_context.hash(profile.password),
+        type            = profile.type,
+        first_name      = profile.first_name,
+        last_name       = profile.last_name,
+        date_of_birth   = profile.date_of_birth,
+        address         = profile.address,
+        sub_district    = profile.sub_district,
+        district        = profile.district,
+        province        = profile.province,
+        postcode        = profile.postcode,
+        height          = profile.height,
+        weight          = profile.weight,
+        pressure        = profile.pressure,
+    ) 
+
+    await database.execute(query)
+    
+    return { profile.type }
+
 # ! Dashboard
 @app.get("/api/dashboard/", tags=["Dashboard"], response_model=List[model.Dashboard])
 async def get_dashboard():
