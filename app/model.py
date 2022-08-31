@@ -28,22 +28,6 @@ class Profile(BaseModel):
     height : str = Field(..., example="170")
     weight : str = Field(..., example="60")
     pressure : str = Field(..., example="90")
-    
-class ProfileAdmin(BaseModel):
-    username: str = Field(..., example="admin@example.com")
-    password: str = Field(..., example="admin")
-    type : str = Field(..., example='0')
-    first_name : str = Field(..., example="first name")
-    last_name : str = Field(..., example="last name")
-    date_of_birth : str = Field(..., example="2000-12-31")
-    address : str = Field(..., example="123 m.4")
-    sub_district : str = Field(..., example="Rat Burana")
-    district : str = Field(..., example="Rat Burana")
-    province : str = Field(..., example="Bangkok")
-    postcode : str = Field(..., example="10140")
-    height : str = Field(..., example="170")
-    weight : str = Field(..., example="60")
-    pressure : str = Field(..., example="90")
 
 class ProfileGet(BaseModel):
     id : int

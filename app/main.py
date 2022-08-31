@@ -43,7 +43,7 @@ async def shutdown():
 # ! Users
 @app.get("/api/user", response_model=List[model.UserList], tags=["Users"])
 async def find_all_users():
-    query = users.select()
+    query = users.select().where(users.c.type == '1')
     return await database.fetch_all(query)
 
 
@@ -66,7 +66,6 @@ async def get_login(user: model.Login):
                 'message' : {
                     'id' : data_id,
                     'username' : data_username,
-                    'type' : data_type
                     }
                 }
     else:
@@ -102,28 +101,6 @@ async def get_register(profile: model.Profile):
     
     return { profile.type }
 
-@app.post("/api/register-admin/", tags=["Register"])
-async def get_register_admin(profile: model.ProfileAdmin):
-    query = users.insert().values(
-        username        = profile.username,
-        password        = pwd_context.hash(profile.password),
-        type            = profile.type,
-        first_name      = profile.first_name,
-        last_name       = profile.last_name,
-        date_of_birth   = profile.date_of_birth,
-        address         = profile.address,
-        sub_district    = profile.sub_district,
-        district        = profile.district,
-        province        = profile.province,
-        postcode        = profile.postcode,
-        height          = profile.height,
-        weight          = profile.weight,
-        pressure        = profile.pressure,
-    ) 
-
-    await database.execute(query)
-    
-    return { profile.type }
 
 # ! Dashboard
 @app.get("/api/dashboard/", tags=["Dashboard"], response_model=List[model.Dashboard])
@@ -167,4 +144,32 @@ async def delete_profile(userId):
     return {
         "status" : True,
         "message": "This user has been deleted successfully." 
+    }
+    
+    
+# ! Admin
+@app.get("/init/register-admin/", tags=["Admin"])
+async def get_register_admin():
+    query = users.insert().values(
+        username        = "admin@example.com",
+        password        = pwd_context.hash("admin"),
+        type            = "0",
+        first_name      = "admin",
+        last_name       = "admin",
+        date_of_birth   = "1990-12-31",
+        address         = "123 m.4",
+        sub_district    = "Rat Burana",
+        district        = "Rat Burana",
+        province        = "Bangkok",
+        postcode        = "10140",
+        height          = "170",
+        weight          = "60",
+        pressure        = "95",
+    ) 
+
+    await database.execute(query)
+    
+    return { 
+        "username" : "admin@example.com",
+        "password" : "admin"
     }

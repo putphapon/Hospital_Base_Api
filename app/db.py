@@ -9,7 +9,7 @@ users = sqlalchemy.Table(
     "base_user",
     metadata,
     sqlalchemy.Column("id" , sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column("username" , sqlalchemy.String),
+    sqlalchemy.Column("username" , sqlalchemy.String, unique=True),
     sqlalchemy.Column("password" , sqlalchemy.String),
     sqlalchemy.Column("type", sqlalchemy.CHAR),
     sqlalchemy.Column("first_name" , sqlalchemy.String),
