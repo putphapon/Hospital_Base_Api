@@ -1,9 +1,9 @@
-# Build
+# Build docker
 ```console
 docker-compose build
 ```
 
-# Up
+# Run docker
 ``` console
 docker-compose up
 ```
