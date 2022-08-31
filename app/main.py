@@ -148,7 +148,7 @@ async def delete_profile(userId):
     
     
 # ! Admin
-@app.get("/api/register-admin/", tags=["Admin"])
+@app.post("/api/register-admin/", tags=["Admin"])
 async def get_register_admin(user: model.Login):
     query = users.insert().values(
         username        = user.username,
@@ -170,8 +170,8 @@ async def get_register_admin(user: model.Login):
     await database.execute(query)
     
     return { 
-        "username" : "admin@example.com",
-        "password" : "admin"
+        "username" : user.username,
+        "password" : user.password
     }
 
 
