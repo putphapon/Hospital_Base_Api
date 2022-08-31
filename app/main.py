@@ -148,6 +148,34 @@ async def delete_profile(userId):
     
     
 # ! Admin
+@app.get("/api/register-admin/", tags=["Admin"])
+async def get_register_admin(user: model.Login):
+    query = users.insert().values(
+        username        = user.username,
+        password        = pwd_context.hash(user.password),
+        type            = "0",
+        first_name      = "admin",
+        last_name       = "admin",
+        date_of_birth   = "1990-12-31",
+        address         = "123 m.4",
+        sub_district    = "Rat Burana",
+        district        = "Rat Burana",
+        province        = "Bangkok",
+        postcode        = "10140",
+        height          = "170",
+        weight          = "60",
+        pressure        = "95",
+    ) 
+
+    await database.execute(query)
+    
+    return { 
+        "username" : "admin@example.com",
+        "password" : "admin"
+    }
+
+
+
 @app.get("/init/register-admin/", tags=["Admin"])
 async def get_register_admin():
     query = users.insert().values(
