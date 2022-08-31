@@ -66,6 +66,7 @@ async def get_login(user: model.Login):
                 'message' : {
                     'id' : data_id,
                     'username' : data_username,
+                    'type' : data_type
                     }
                 }
     else:
